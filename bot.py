@@ -1,8 +1,12 @@
+import os
 import telebot
 from telebot import types
 
-# Replace with your actual bot token from BotFather
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+# Load BOT_TOKEN from environment variables
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+if not BOT_TOKEN:
+    raise ValueError("⚠️ BOT_TOKEN is missing! Please set it in environment variables.")
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -42,4 +46,6 @@ def menu(message):
         start(message)  # Return to main menu
 
 print("Bot is running...")
-bot.infinity_polling()
+
+# Keep polling
+bot.polling()
